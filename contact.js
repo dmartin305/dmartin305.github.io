@@ -243,16 +243,15 @@ export default {
     const linkedinHover = context.world.contact.linkedinhover;
     if (linkedinHover) window.open(linkedinURL);
   },
-  onClickEmail() {
+  async onClickEmail() {
     const emailHover = context.world.contact.emailhover;
-    if (emailHover) copyContent();
-  },
-  async copyContent() {
-    try {
+    if (emailHover) {
+      try {
       await navigator.clipboard.writeText("dmartin305@gatech.edu");
       console.log("Content copied to clipboard");
     } catch (err) {
       console.error("Failed to copy: ", err);
+    }
     }
   },
 };
