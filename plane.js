@@ -1,5 +1,5 @@
 import context from "./context";
-import * as THREE from "three";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.min.js";
 import gsap from "gsap";
 
 const randomValues = [];
