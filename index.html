@@ -8,12 +8,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
   </head>
   <body> 
-    <a id = "back-button" class="link" href="#"><h2 class = "david-text">BACK</h2></a>
-    <div class="container">
+    <div id = "topnav">
+      <a class="link david-text">DAVID MARTIN</a>
+      <a  class ="link david-text">RESUME</a>
+      <a class ="link david-text">ABOUT ME</a>
+      <a class ="link david-text">CONTACT</a>
+    </div>
+    <div id="container">
+      <a id = "back-button" class="link" href="#"><h2 class = "david-text">BACK</h2></a>
       <canvas id = "bg"></canvas>
       <div id = "gui-container" class = "gui-container">
-        <h1 class = "david-text david-header">DAVID MARTIN</h1>
-        <div class = "button-container">
+        <h1 id = "david-martin" class = "david-text david-header">DAVID MARTIN</h1>
+        <div id = "button-group" class = "button-container">
           <a id = "resume" class ="link"><button class = "david-text button-35">RESUME</button></a>
           <a id = "about" class ="link"><button class = "david-text button-35">ABOUT ME</button></a>
           <a id = "contact" class ="link"><button class = "david-text button-35">CONTACT</button></a>
@@ -25,6 +31,7 @@
       <div id = "resume-container">
         <h1 id = "resume-helper-text" class = "david-text"></h1>
       </div>
+
       <div id ="about-me-container"></div>
     </div>
     <script type="module" src="/main.js"></script>
