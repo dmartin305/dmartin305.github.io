@@ -1,4 +1,3 @@
-import "./style.css";
 import context from "./context";
 import resumeMenu from "./resume/menu";
 import contactMenu from "./contact";
