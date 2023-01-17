@@ -237,6 +237,7 @@ export default {
   async onClickDownload() {
     const downloadHover = context.world.resume.physicalResumehover;
     if (downloadHover) {
+      context.world.resume.physicalResumehover = false;
       var link = document.createElement("a");
       link.download = "document";
       link.href = "../bg.jpeg";
