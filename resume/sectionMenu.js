@@ -1,6 +1,6 @@
 import context from "../context";
-import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
+import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 import gsap from "gsap";
 import education from "./sections/education";
 import experience from "./sections/experience";
@@ -8,9 +8,6 @@ import skills from "./sections/skills";
 import menu from "./menu";
 let icons = context.icons.resume.interaction;
 let prevIcons, sectionIcons;
-let educationHover = context.world.resume.resumeSection.educationhover;
-let experienceHover = context.world.resume.resumeSection.experiencehover;
-let skillHover = context.world.resume.resumeSection.skillshover;
 
 export default {
   start() {
@@ -170,14 +167,18 @@ export default {
     this.onClickSkills();
   },
   onClickExperience() {
+    let experienceHover = context.world.resume.resumeSection.experiencehover;
     if (experienceHover) {
-      document.getElementById("resume-helper-text");
+      context.world.resume.resumeSection.experiencehover = false;
+      document.getElementById("resume-helper-text").innerText = "";
       experience.start();
     }
   },
   onClickSkills() {
+    let skillHover = context.world.resume.resumeSection.skillshover;
     if (skillHover) {
-      document.getElementById("resume-helper-text");
+      context.world.resume.resumeSection.skillshover = false;
+      document.getElementById("resume-helper-text").innerText = "";
       skills.start();
     }
   },
