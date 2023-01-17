@@ -1,5 +1,6 @@
 import context from "./context";
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.min.js";
+import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
 import gsap from "gsap";
 
 const randomValues = [];

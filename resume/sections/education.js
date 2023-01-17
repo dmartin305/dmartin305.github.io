@@ -1,6 +1,6 @@
 import context from "../../context";
-import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
 import gsap from "gsap";
 
 export default {
@@ -16,11 +16,12 @@ export default {
     loader.load("models/techtowerisland.glb", function (gltf) {
       context.objects.techtower.object = gltf.scene;
       let techtower = context.objects.techtower.object;
-      techtower.position.x = context.camera.position.x - 15;
-      techtower.position.z = 5;
-      techtower.rotation.x = Math.PI / 2;
 
-      context.scene.add(techtower);
+      gltf.scene.position.x = context.camera.position.x - 15;
+      gltf.scene.position.z = 5;
+      gltf.scene.rotation.x = Math.PI / 2;
+
+      context.scene.add(gltf.scene);
     });
   },
   return() {},

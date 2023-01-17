@@ -15,8 +15,6 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.11.3",
-    "dat.gui": "^0.7.9",
-    "gsap": "^3.11.4",
-    "three": "^0.147.0"
+    "gsap": "^3.11.4"
   }
 }

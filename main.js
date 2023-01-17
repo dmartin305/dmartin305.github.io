@@ -1,13 +1,14 @@
 import "./style.css";
 import context from "./context";
-// import * as THREE from "three";
 import resumeMenu from "./resume/menu";
 import contactMenu from "./contact";
 import resumeSectionMenu from "./resume/sectionMenu";
 import plane from "./plane";
 import aboutMenu from "./about";
 import sectionMenu from "./resume/sectionMenu";
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.min.js"
+import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+
 context.raycaster = new THREE.Raycaster();
 context.scene = new THREE.Scene();
 
