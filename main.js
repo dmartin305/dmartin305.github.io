@@ -1,12 +1,13 @@
 import "./style.css";
 import context from "./context";
-import * as THREE from "three";
+// import * as THREE from "three";
 import resumeMenu from "./resume/menu";
 import contactMenu from "./contact";
 import resumeSectionMenu from "./resume/sectionMenu";
 import plane from "./plane";
 import aboutMenu from "./about";
 import sectionMenu from "./resume/sectionMenu";
+import * as THREE from "https://www.unpkg.com/three@latest/";
 
 context.raycaster = new THREE.Raycaster();
 context.scene = new THREE.Scene();
@@ -67,18 +68,17 @@ function addAllEventListers() {
   let contact = document.getElementById("contact");
   let backButton = document.getElementById("back-button");
 
-  
   about.addEventListener("click", () => aboutMenu.start());
   resume.addEventListener("click", () => resumeMenu.start());
   contact.addEventListener("click", () => contactMenu.start());
-  
+
   backButton.addEventListener("click", () => {
     if (pageIs("contact")) contactMenu.returnHome();
     if (pageIs("resume")) resumeMenu.returnHome();
     if (pageIs("about")) aboutMenu.returnHome();
     if (pageIs("resumeSection")) sectionMenu.return();
   });
-  
+
   addEventListener("click", () => {
     console.log(context.world.currentPage);
     if (pageIs("resume")) resumeMenu.onClick();
@@ -97,9 +97,7 @@ function addAllEventListers() {
     false
   );
 
-  document.addEventListener("wheel", (event) => {
-
-  });
+  document.addEventListener("wheel", (event) => {});
 
   addEventListener("mousemove", (event) => {
     context.mouse.x = (event.clientX / innerWidth) * 2 - 1;
