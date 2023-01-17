@@ -1,6 +1,6 @@
 import context from "./context";
-import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
+import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 import gsap from "gsap";
 
 let icons = context.icons.contact;
@@ -241,17 +241,21 @@ export default {
   },
   onClickLinkedin() {
     const linkedinHover = context.world.contact.linkedinhover;
-    if (linkedinHover) window.open(linkedinURL);
+    if (linkedinHover) {
+      window.open(linkedinURL);
+      context.world.contact.linkedinhover = false;
+    }
   },
   async onClickEmail() {
     const emailHover = context.world.contact.emailhover;
     if (emailHover) {
       try {
-      await navigator.clipboard.writeText("dmartin305@gatech.edu");
-      console.log("Content copied to clipboard");
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-    }
+        await navigator.clipboard.writeText("dmartin305@gatech.edu");
+        console.log("Content copied to clipboard");
+        context.world.contact.emailhover = false;
+      } catch (err) {
+        console.error("Failed to copy: ", err);
+      }
     }
   },
 };
