@@ -1,6 +1,5 @@
 import context from "./context";
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
-import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 import gsap from "gsap";
 
 let icons = context.icons.contact;
@@ -10,6 +9,7 @@ let header = document.getElementById("david-martin");
 let buttonGroup = document.getElementById("button-group");
 let topnav = document.getElementById("topnav");
 let backButton = document.getElementById("back-button");
+
 export default {
   start() {
     let rotation = context.camera.rotation;
@@ -247,6 +247,7 @@ export default {
     }
   },
   async onClickEmail() {
+    // TODO add feedback for user to know email is copied 
     const emailHover = context.world.contact.emailhover;
     if (emailHover) {
       try {
