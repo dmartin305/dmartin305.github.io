@@ -5,8 +5,16 @@ import resumeSectionMenu from "./resume/sectionMenu";
 import plane from "./plane";
 import aboutMenu from "./about";
 import sectionMenu from "./resume/sectionMenu";
-import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
+import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
+
+let intro = document.querySelector(".intro");
+let splashText = document.querySelector(".splash-screen");
+let splashSpan = document.querySelectorAll(".splash-text");
+let about = document.getElementById("about");
+let resume = document.getElementById("resume");
+let contact = document.getElementById("contact");
+let backButton = document.getElementById("back-button");
 
 context.raycaster = new THREE.Raycaster();
 context.scene = new THREE.Scene();
@@ -31,6 +39,7 @@ function animate() {
 function pageIs(page) {
   return context.world.currentPage === page;
 }
+
 // #region World Creation
 function createCamera() {
   context.camera = new THREE.PerspectiveCamera(
@@ -61,47 +70,63 @@ function furnishLighting() {
 //#endregion
 
 function addAllEventListers() {
-  // Create short hand for html elements to make the following easier to read
-  let about = document.getElementById("about");
-  let resume = document.getElementById("resume");
-  let contact = document.getElementById("contact");
-  let backButton = document.getElementById("back-button");
-
   about.addEventListener("click", () => aboutMenu.start());
   resume.addEventListener("click", () => resumeMenu.start());
   contact.addEventListener("click", () => contactMenu.start());
+  backButton.addEventListener("click", handleBackButton);
+  addEventListener("click", threejsClick);
+  window.addEventListener("DOMContentLoaded", splashScreen);
+  window.addEventListener("resize", resizeWindow);
+  document.addEventListener("wheel", scroll);
+  addEventListener("mousemove", trackMouse);
+}
+function scroll() {}
+function splashScreen() {
+  setTimeout(() => {
+    splashSpan.forEach((span, index) => {
+      setTimeout(() => {
+        span.classList.add("active");
+      }, [(index + 1) * 400]);
+    });
 
-  backButton.addEventListener("click", () => {
-    if (pageIs("contact")) contactMenu.returnHome();
-    if (pageIs("resume")) resumeMenu.returnHome();
-    if (pageIs("about")) aboutMenu.returnHome();
-    if (pageIs("resumeSection")) sectionMenu.return();
+    setTimeout(() => {
+      splashSpan.forEach((span, index) => {
+        setTimeout(() => {
+          span.classList.remove("active");
+          span.classList.add("fade");
+        }, (index + 1) * 50);
+      });
+    }, 2000);
+
+    setTimeout(() => {
+      intro.style.top = "-100vh";
+    }, 3000);
   });
+}
 
-  addEventListener("click", () => {
-    console.log(context.world.currentPage);
-    if (pageIs("resume")) resumeMenu.onClick();
-    if (pageIs("about")) aboutMenu.onClick();
-    if (pageIs("contact")) contactMenu.onClick();
-    if (pageIs("resumeSection")) resumeSectionMenu.onClick();
-  });
+function threejsClick() {
+  if (pageIs("resume")) resumeMenu.onClick();
+  if (pageIs("about")) aboutMenu.onClick();
+  if (pageIs("contact")) contactMenu.onClick();
+  if (pageIs("resumeSection")) resumeSectionMenu.onClick();
+}
 
-  window.addEventListener(
-    "resize",
-    () => {
-      context.camera.aspect = window.innerWidth / window.innerHeight;
-      context.camera.updateProjectionMatrix();
-      context.renderer.setSize(window.innerWidth, window.innerHeight);
-    },
-    false
-  );
+function handleBackButton() {
+  if (pageIs("contact")) contactMenu.returnHome();
+  if (pageIs("resume")) resumeMenu.returnHome();
+  if (pageIs("about")) aboutMenu.returnHome();
+  if (pageIs("resumeSection")) sectionMenu.return();
+}
 
-  document.addEventListener("wheel", (event) => {});
+function resizeWindow() {
+  context.camera.aspect = window.innerWidth / window.innerHeight;
+  context.camera.updateProjectionMatrix();
+  context.renderer.setSize(window.innerWidth, window.innerHeight);
+}
 
-  addEventListener("mousemove", (event) => {
-    context.mouse.x = (event.clientX / innerWidth) * 2 - 1;
-    context.mouse.y = -(event.clientY / innerHeight) * 2 + 1;
-  });
+function trackMouse() {
+  context.mouse.x = (event.clientX / innerWidth) * 2 - 1;
+  context.mouse.y = -(event.clientY / innerHeight) * 2 + 1;
 }
 
 animate();
