@@ -1,3 +1,4 @@
+// #region Imports
 import context from "./context";
 import resumeMenu from "./resume/menu";
 import contactMenu from "./contact";
@@ -6,8 +7,9 @@ import plane from "./plane";
 import aboutMenu from "./about";
 import sectionMenu from "./resume/sectionMenu";
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
-import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
+// #endregion
 
+// #region Reference vars
 let intro = document.querySelector(".intro");
 let splashText = document.querySelector(".splash-screen");
 let splashSpan = document.querySelectorAll(".splash-text");
@@ -15,30 +17,21 @@ let about = document.getElementById("about");
 let resume = document.getElementById("resume");
 let contact = document.getElementById("contact");
 let backButton = document.getElementById("back-button");
+// #endregion 
 
+// #region Misc set up
 context.raycaster = new THREE.Raycaster();
 context.scene = new THREE.Scene();
-
 createCamera();
 createRenderer();
 plane.create();
 furnishLighting();
 addAllEventListers();
 
-function animate() {
-  requestAnimationFrame(animate);
-  context.renderer.render(context.scene, context.camera);
-  context.raycaster.setFromCamera(context.mouse, context.camera);
-  plane.animate();
-  if (pageIs("contact")) contactMenu.animate();
-  if (pageIs("resume")) resumeMenu.animate();
-  if (pageIs("about")) aboutMenu.animate();
-  if (pageIs("resumeSection")) resumeSectionMenu.animate();
-}
-
 function pageIs(page) {
   return context.world.currentPage === page;
 }
+// #endregion
 
 // #region World Creation
 function createCamera() {
@@ -69,6 +62,7 @@ function furnishLighting() {
 }
 //#endregion
 
+// #region Event Handling
 function addAllEventListers() {
   about.addEventListener("click", () => aboutMenu.start());
   resume.addEventListener("click", () => resumeMenu.start());
@@ -81,6 +75,7 @@ function addAllEventListers() {
   addEventListener("mousemove", trackMouse);
 }
 function scroll() {}
+
 function splashScreen() {
   setTimeout(() => {
     splashSpan.forEach((span, index) => {
@@ -127,6 +122,18 @@ function resizeWindow() {
 function trackMouse() {
   context.mouse.x = (event.clientX / innerWidth) * 2 - 1;
   context.mouse.y = -(event.clientY / innerHeight) * 2 + 1;
+}
+// #endregion
+
+function animate() {
+  requestAnimationFrame(animate);
+  context.renderer.render(context.scene, context.camera);
+  context.raycaster.setFromCamera(context.mouse, context.camera);
+  plane.animate();
+  if (pageIs("contact")) contactMenu.animate();
+  if (pageIs("resume")) resumeMenu.animate();
+  if (pageIs("about")) aboutMenu.animate();
+  if (pageIs("resumeSection")) resumeSectionMenu.animate();
 }
 
 animate();
