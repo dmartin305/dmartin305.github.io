@@ -20,15 +20,11 @@ body { top: 0; left:0; margin: 0; overflow: hidden; background-color: #111;}
 /* #region Buttons */
 .button-35 {
   align-items: center;
-  background-color: #111;
+  background-image: linear-gradient(45deg,rgb(61, 65, 187), rgb(92, 13, 92) );
   border-radius: 12px;
-  box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+  box-shadow: .5vw .5vw purple;
   box-sizing: border-box;
-  color: #121212;
-  font-size: 4vw;
-  justify-content: center;
-  line-height: 1;
-  padding: 4vw;
+  padding: 1vw;
   text-align: center;
   transition: box-shadow .2s,-webkit-box-shadow .2s;
   border: 0;
@@ -36,7 +32,7 @@ body { top: 0; left:0; margin: 0; overflow: hidden; background-color: #111;}
 
 .button-35:hover { box-shadow: #fff 0 0 0 3px, transparent 0 0 0 0; } 
 
-#back-button { opacity: 0; position: absolute; top: 0; left: 0;  z-index: 10; margin: 2vh; }
+#back-button { opacity: 0; position: absolute; top: 0; left: 0;  z-index: -1; margin: 2vh; }
 /* #endregion  */
 
 /* #region Top level menu */
