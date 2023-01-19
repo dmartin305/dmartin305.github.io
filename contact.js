@@ -9,7 +9,7 @@ let header = document.getElementById("david-martin");
 let buttonGroup = document.getElementById("button-group");
 let topnav = document.getElementById("topnav");
 let backButton = document.getElementById("back-button");
-
+let cameraX = window.innerWidth < 768 ? -120 : -100;
 export default {
   start() {
     let rotation = context.camera.rotation;
@@ -47,7 +47,7 @@ export default {
         position,
         {
           z: 10,
-          x: -100,
+          x: cameraX,
           duration: 1,
           ease: "power1.in",
         },
@@ -247,7 +247,7 @@ export default {
     }
   },
   async onClickEmail() {
-    // TODO add feedback for user to know email is copied 
+    // TODO add feedback for user to know email is copied
     const emailHover = context.world.contact.emailhover;
     if (emailHover) {
       try {
