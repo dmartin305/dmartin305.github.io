@@ -1,5 +1,5 @@
 import context from "../context";
-import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import gsap from "gsap";
 import sectionMenu from "./sectionMenu";
 
@@ -16,7 +16,9 @@ export default {
       context.pagesVisited.push("resume");
     }
     context.world.currentPage = "resume";
-
+    let width =
+      context.renderer.domElement.attributes.width.ownerElement.clientWidth;
+    let cameraX = width < 768 ? 120 : 100;
     let tl = gsap.timeline();
     tl.to(header, {
       x: -innerWidth / 2 + header.clientWidth / 2,
@@ -44,7 +46,7 @@ export default {
         context.camera.position,
         {
           z: 10,
-          x: 100,
+          x: cameraX,
           duration: 1,
           ease: "power1.in",
         },
