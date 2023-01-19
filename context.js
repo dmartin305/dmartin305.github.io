@@ -26,6 +26,7 @@ export default {
       materials:[]
     }
   },
+  clientWidth: undefined,
   pagesVisited: ["home"],
   visited: {
     resume: {
