@@ -7,6 +7,7 @@ import plane from "./plane";
 import aboutMenu from "./about";
 import sectionMenu from "./resume/sectionMenu";
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
+import gsap from "gsap";
 // #endregion
 
 // #region Reference vars
@@ -17,7 +18,7 @@ let about = document.getElementById("about");
 let resume = document.getElementById("resume");
 let contact = document.getElementById("contact");
 let backButton = document.getElementById("back-button");
-// #endregion 
+// #endregion
 
 // #region Misc set up
 context.raycaster = new THREE.Raycaster();
@@ -92,9 +93,13 @@ function splashScreen() {
         }, (index + 1) * 50);
       });
     }, 2000);
-
+    const tl = gsap.timeline();
     setTimeout(() => {
-      intro.style.top = "-100vh";
+      tl.to(intro, {
+        top: "-100vh",
+        duration: 1,
+        ease: "power4.in",
+      });
     }, 3000);
   });
 }
