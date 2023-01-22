@@ -2,7 +2,6 @@ import context from "./context";
 import gsap from "gsap";
 let header = document.getElementById("david-martin");
 let buttonGroup = document.getElementById("button-group");
-let topnav = document.getElementById("topnav");
 let backButton = document.getElementById("back-button");
 export default {
   start() {
@@ -32,7 +31,6 @@ export default {
         },
         "-=1"
       )
-      .to(topnav, { height: 50, opacity: 1, duration: 1 }, "-=.5")
       .to(rotation, {
         x: Math.PI / 2,
         duration: 1,
