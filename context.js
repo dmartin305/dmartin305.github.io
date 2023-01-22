@@ -18,6 +18,13 @@ export default {
       email: undefined,
     },
   },
+  isMobile: undefined,
+  linkedinURL: "https://www.linkedin.com/in/david-martin-507132148",
+  backButton: undefined,
+  buttonGroup: undefined,
+  mobileMenu: undefined,
+  mainMenu: undefined,
+  header: undefined,
   objects: {
     plane: undefined,
     techtower: {
