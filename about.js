@@ -3,8 +3,7 @@ import gsap from "gsap";
 import anim from "./animation";
 
 var rotation, position;
-// let context.buttonGroup = document.getElementById("button-group");
-// let context.backButton = document.getElementById("back-button");
+
 let tl = gsap.timeline();
 export default {
   start() {
@@ -41,6 +40,7 @@ export default {
       .to(context.buttonGroup, anim.panIn(context.buttonGroup), "-=1")
       .to(rotation, anim.mainMenuRotation)
       .to(position, anim.mainMenuLocation, "-=1");
+    context.mobileMenu.innerHTML = "";
   },
   animate() {},
   onClick() {},
