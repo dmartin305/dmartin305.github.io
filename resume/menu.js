@@ -162,7 +162,7 @@ export default {
   },
   async onClickDownload() {
     const downloadHover = context.world.resume.physicalResumehover;
-    if (downloadHover) {
+    if (downloadHover || context.isMobile) {
       context.world.resume.physicalResumehover = false;
       var link = document.createElement("a");
       link.download = "document";
@@ -172,9 +172,8 @@ export default {
   },
   onClickInteractiveResume() {
     const interactiveHover = context.world.resume.interactiveResumehover;
-    if (interactiveHover) {
+    if (interactiveHover || context.isMobile) {
       context.world.resume.interactiveResumehover = false;
-      document.getElementById("resume-helper-text").innerText = "";
       sectionMenu.start();
     }
   },
