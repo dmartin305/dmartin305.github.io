@@ -3,7 +3,16 @@ import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module
 import gsap from "gsap";
 import anim from "./animation";
 
-var linkedinButton, emailButton, linkedin, email, rotation, position;
+var linkedinButton,
+  emailButton,
+  linkedin,
+  email,
+  linkedinHide,
+  linkedinReveal,
+  emailHide,
+  emailReveal,
+  rotation,
+  position;
 let icons = context.icons.contact;
 let tl = gsap.timeline();
 
@@ -12,12 +21,22 @@ export default {
     context.world.currentPage = "contact";
     let unVisited = !context.pagesVisited.includes("contact");
     if (unVisited) {
-      context.isMobile ? this.loadHTML() : this.loadObjects();
+      if (context.isMobile) {
+        this.loadHTML();
+        email = emailButton;
+        linkedin = linkedinButton;
+        emailHide = linkedinHide = anim.hideHTML;
+        emailReveal = linkedinReveal = anim.revealHTML;
+      } else { 
+        this.loadObjects();
+        email = icons.email.material;
+        linkedin = icons.linkedin.material;
+        emailHide = linkedinHide = anim.hideMesh;
+        emailReveal = linkedinReveal = anim.hideMesh;
+      }
       context.pagesVisited.push("contact");
       rotation = context.camera.rotation;
       position = context.camera.position;
-      email = context.isMobile ? emailButton : icons.email.material;
-      linkedin = context.isMobile ? linkedinButton : icons.linkedin.material;
     }
 
     tl.to(context.header, anim.panOut(context.header))
@@ -26,8 +45,8 @@ export default {
       .to(position, anim.contactLocation, "-=1")
       .to(context.mainMenu, anim.hideHTML, "-=1")
       .to(context.mobileMenu, anim.revealHTML)
-      .to(linkedin, anim.revealMesh)
-      .to(email, anim.revealMesh)
+      .to(linkedin, linkedinReveal)
+      .to(email, emailReveal)
       .to(context.backButton, anim.revealHTML);
   },
   loadHTML() {
@@ -80,8 +99,8 @@ export default {
   },
   returnHome() {
     context.world.currentPage = "home";
-    tl.to(email, context.isMobile ? anim.hideHTML : anim.hideMesh)
-      .to(linkedin, context.isMobile ? anim.hideHTML : anim.hideMesh, "-=1")
+    tl.to(email, emailHide)
+      .to(linkedin, linkedinHide, "-=1")
       .to(context.backButton, anim.hideHTML, "-=1")
       .to(context.mainMenu, anim.revealHTML, "-=1")
       .to(context.header, anim.panIn(context.header), "-=.5")
