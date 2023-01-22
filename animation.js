@@ -2,14 +2,16 @@ let halfPI = Math.PI / 2;
 
 export default {
   // CAMERA LOCATIONS
+  sharedCam: { duration: 1, ease: "power1.in" },
   contactLocation: { x: -100, y: 0, z: 10, duration: 1, ease: "power1.in" },
-  resumeLocation: {},
+  resumeLocation: { x: 100, y: 0, z: 10, duration: 1, ease: "power1.in" },
   aboutLocation: { x: 0, y: 100, z: 10, duration: 1, ease: "power1.in" },
   mainMenuLocation: { x: 0, y: 0, z: 100, duration: 1, ease: "power4.out" },
 
   // CAMERA ROTATION
-  contactRotation: { y: -halfPI, z: -halfPI, duration: 1, ease: "power4.in" },
-  resumeRotation: {},
+  sharedRot: { duration: 1, ease: "power4.out" },
+  contactRotation: { y: -halfPI, z: -halfPI, duration: 1, ease: "power4.out" },
+  resumeRotation: { y: halfPI, z: halfPI, duration: 1, ease: "power4.out" },
   aboutRotation: { x: halfPI, y: 0, z: 0, duration: 1, ease: "power4.out" },
   mainMenuRotation: { x: 0, y: 0, z: 0, duration: 1, ease: "power4.out" },
 
