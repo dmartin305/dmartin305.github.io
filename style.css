@@ -1,12 +1,11 @@
-body { top: 0; left:0; margin: 0; overflow: hidden; background-color: #111;}
+body {top: 0; left:0; margin: 0; overflow:hidden;  background-color: #111;}
 
-#container { position: relative; width: 100vw; display: flex; align-items: center;  justify-content: center; }
+#container { position: absolute; width: 100vw; height:100vh; display: flex; align-items: center;  justify-content: center; }
 
-#topnav { background-color: #111; height: 0; opacity: 0; }
 
 /* #region Splash Screen */
 .intro { position: fixed; z-index: 1; left:0; right:0;
-   width: 100%; height: 100vh; background-color: #111; transition: 1s;}
+   width: 100vw; height: 100vh; background-color: #111; transition: 1s;}
 
 .splash-screen { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); }
 
@@ -29,40 +28,32 @@ body { top: 0; left:0; margin: 0; overflow: hidden; background-color: #111;}
   transition: box-shadow .2s,-webkit-box-shadow .2s;
   border: 0;
 }
-
+svg text {
+  font-family: FontAwesome;
+  background-color:white;
+}
 .button-35:hover { box-shadow: #fff 0 0 0 3px, transparent 0 0 0 0; } 
 
-#back-button { opacity: 0; position: absolute; top: 0; left: 0;  z-index: -1; margin: 2vh; }
+#back-button {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  font-size: 7vw;
+  color:#fff;
+  opacity: 0;
+  z-index: -1;
+}
 /* #endregion  */
 
 /* #region Top level menu */
-.gui-container { opacity: 1; position: absolute; flex-direction: column; }
-
+.gui-container { opacity: 1; position: absolute; flex-direction: column; display: flex }
+#mobile-button-container { opacity: 0; z-index: -1; align-content: space-around; display: flex; flex-direction: column; }
 .button-container { align-content: space-around; display: flex; flex-direction: row; }
 /* #endregion */
-
-#resume-container {
+#helper-text {
   width: 100vw;
-  height: 100vh;
-  opacity: 0;
-  position: absolute;
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: -1;
-}
-
-#contact-container {
-  width: 100vw;
-  height: 100vh;
-  opacity: 0;
-  position: absolute;
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: -1;
+  position:absolute;
+  margin:0;
 }
 
 /* #region Typeography */
@@ -91,7 +82,12 @@ h2 { font-size: 7vw; font-family: "Permanent Marker"; color: white; }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {}
+@media only screen and (min-width: 768px) {
+  .gui-container {align-content: center;}
+  .david-header {display: inline-flex; font-size: 8vw; text-align: center;justify-content: center;}
+  .button-container {flex-direction: row;}
+  .button-35{width:30vw; font-size:4vw; margin:1vw}
+}
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {}
