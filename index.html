@@ -8,31 +8,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-    <script type = "importmap">
-      {
-        "imports":{
-            "three": "https://cdn.skypack.dev/three@0.129.0/build/three.module.js",
-            "GLTFLoader": "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js"
-        }
-    }
-    </script>
+    <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   </head>
   <body> 
-    <div id = "topnav">
-      <a class ="link david-text">DAVID MARTIN</a>
-      <a class ="link david-text">RESUME</a>
-      <a class ="link david-text">ABOUT ME</a>
-      <a class ="link david-text">CONTACT</a>
-    </div>
-    <div class = "intro">
-      <h2 class = "splash-screen">
-        <span class = "splash-text">David</span> 
-        <span class = "splash-text">Martin</span>
-      </h2>
-    </div>
     <div id="container">
-      <a id = "back-button" class="link" href="#"><h2 class = "david-text">BACK</h2></a>
+      <div class = "intro">
+        <h2 class = "splash-screen">
+          <span class = "splash-text">David</span> 
+          <span class = "splash-text">Martin</span>
+        </h2>
+      </div>
+
+      <a id = "back-button" class="link" href = "#"><i class = "fa fa-arrow-circle-left"></i></a>
+
       <canvas id = "bg"></canvas>
+
+      <div id = "mobile-button-container" class = "gui-container">
+
+      </div>
+
       <div id = "gui-container" class = "gui-container">
         <h1 id = "david-martin" class = "david-text david-header">DAVID MARTIN</h1>
         <div id = "button-group" class = "button-container">
@@ -41,14 +36,8 @@
           <a id = "contact" class ="link"><button class = "david-text button-35">CONTACT</button></a>
         </div>
       </div>
-      <div id = "contact-container">
-        <h1 id = "contact-helper-text" class = "david-text"></h1>
-      </div>
-      <div id = "resume-container">
-        <h1 id = "resume-helper-text" class = "david-text"></h1>
-      </div>
-
-      <div id ="about-me-container"></div>
+      
+      <div id = "helper-text" class="david-text"></div>
     </div>
     <script type="module" src="/main.js"></script>
   </body>
