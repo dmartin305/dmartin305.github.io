@@ -12,12 +12,18 @@ import gsap from "gsap";
 
 // #region Reference vars
 let intro = document.querySelector(".intro");
-let splashText = document.querySelector(".splash-screen");
 let splashSpan = document.querySelectorAll(".splash-text");
 let about = document.getElementById("about");
 let resume = document.getElementById("resume");
 let contact = document.getElementById("contact");
 let backButton = document.getElementById("back-button");
+context.backButton = document.getElementById("back-button");
+context.buttonGroup = document.getElementById("button-group");
+context.header = document.getElementById("david-martin");
+context.mainMenu = document.getElementById("gui-container");
+context.mobileMenu = document.getElementById("mobile-button-container");
+context.header = document.getElementById("david-martin");
+
 // #endregion
 
 // #region Misc set up
@@ -28,6 +34,10 @@ createRenderer();
 plane.create();
 furnishLighting();
 addAllEventListers();
+context.isMobile =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
 
 function pageIs(page) {
   return context.world.currentPage === page;
@@ -49,7 +59,8 @@ function createRenderer() {
   context.renderer = new THREE.WebGLRenderer({
     canvas: document.getElementById("bg"),
   });
-  context.renderer.setSize(window.innerWidth, window.innerHeight);
+  const canvas = document.getElementById("container");
+  context.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
   context.renderer.setPixelRatio(devicePixelRatio);
 }
 
@@ -69,7 +80,10 @@ function addAllEventListers() {
   resume.addEventListener("click", () => resumeMenu.start());
   contact.addEventListener("click", () => contactMenu.start());
   backButton.addEventListener("click", handleBackButton);
-  addEventListener("click", threejsClick);
+  if (context.isMobile) {
+  } else {
+    addEventListener("click", threejsClick);
+  }
   window.addEventListener("DOMContentLoaded", splashScreen);
   window.addEventListener("resize", resizeWindow);
   document.addEventListener("wheel", scroll);
@@ -100,6 +114,9 @@ function splashScreen() {
         duration: 1,
         ease: "power4.in",
       });
+      setTimeout(() => {
+        intro.remove();
+      }, 2000);
     }, 3000);
   });
 }
@@ -128,17 +145,24 @@ function trackMouse() {
   context.mouse.x = (event.clientX / innerWidth) * 2 - 1;
   context.mouse.y = -(event.clientY / innerHeight) * 2 + 1;
 }
+
 // #endregion
 
 function animate() {
-  requestAnimationFrame(animate);
+  // resizeCanvasToDisplaySize();
+  const container = document.getElementById("container");
+  container.height = window.clientHeight;
+  container.width = window.clientWidth;
   context.renderer.render(context.scene, context.camera);
   context.raycaster.setFromCamera(context.mouse, context.camera);
   plane.animate();
-  if (pageIs("contact")) contactMenu.animate();
-  if (pageIs("resume")) resumeMenu.animate();
-  if (pageIs("about")) aboutMenu.animate();
-  if (pageIs("resumeSection")) resumeSectionMenu.animate();
+  if (!context.isMobile) {
+    if (pageIs("contact")) contactMenu.animate();
+    if (pageIs("resume")) resumeMenu.animate();
+    if (pageIs("about")) aboutMenu.animate();
+    if (pageIs("resumeSection")) resumeSectionMenu.animate();
+  }
+  requestAnimationFrame(animate);
 }
 
 animate();
