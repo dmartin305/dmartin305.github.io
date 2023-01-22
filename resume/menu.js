@@ -2,107 +2,76 @@ import context from "../context";
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import gsap from "gsap";
 import sectionMenu from "./sectionMenu";
- const isNotMobile =
-      !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
-const isMobile =
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
+import anim from "../animation";
+
+var interactiveButton,
+  downloadButton,
+  interactive,
+  download,
+  interactiveHide,
+  interactiveReveal,
+  downloadHide,
+  downlaodReveal,
+  rotation,
+  position;
 let icons = context.icons.resume;
-let frame = 0;
-let header = document.getElementById("david-martin");
-let buttonGroup = document.getElementById("button-group");
-let backButton = document.getElementById("back-button");
+let tl = gsap.timeline();
+
 export default {
   start() {
-    var interactiveResume, downloadResume;
-    let visited = context.pagesVisited;
-    // Long variables shortened
-   
-    if (!visited.includes("resume")) {
-      if (isNotMobile) {
-      this.loadObjects();
-      downloadResume = icons.downloadResume.material;
-      interactiveResume = icons.interactiveResume.material;
-      } else {
-        downloadResume = document.createElement("a");
-        downloadResume.id = "downloadResume";
-        downloadResume.className = "link";
-        downloadResume.innerHTML = '<button class = "david-text button-35">Download Resume</button>';
-    
-        interactiveResume = document.createElement("a");
-        interactiveResume.id = "interactiveResume";
-        interactiveResume.className = "link";
-        interactiveResume.innerHTML = '<button class = "david-text button-35">Interactive Resume</button>';
-
-        getElementById("mobile-button-container").appendChild(downloadResume);
-        getElementById("mobile-button-container").appendChild(interactiveResume);
-      }
-      visited.push("resume");
-    }
     context.world.currentPage = "resume";
-    let rotation = context.camera.rotation;
-    let position = context.camera.position;
+    let unVisited = !context.pagesVisited.includes("resume");
+    if (unVisited) {
+      if (context.isMobile) {
+        this.loadHTML();
+        interactive = interactiveButton;
+        download = downloadButton;
+        interactiveHide = downloadHide = anim.hideHTML;
+        interactiveReveal = downlaodReveal = anim.revealHTML;
+      } else {
+        this.loadObjects();
+        interactive = icons.interactiveResume.material;
+        download = icons.downloadResume.material;
+        interactiveHide = downloadHide = anim.hideMesh;
+        interactiveReveal = downlaodReveal = anim.revealMesh;
+      }
+      context.pagesVisited.push("resume");
+      rotation = context.camera.rotation;
+      position = context.camera.position;
+    } else {
+      if (context.isMobile) {
+        context.mobileMenu.appendChild(downloadButton);
+        context.mobileMenu.appendChild(interactiveButton);
+      }
+    }
 
-    let tl = gsap.timeline();
-    tl.to(header, {
-      x: -innerWidth / 2 + header.clientWidth / 2,
-      y: -innerHeight / 2,
-      opacity: 0,
-      duration: 1,
-    })
-      .to(
-        buttonGroup,
-        {
-          x: innerWidth / 2 - buttonGroup.clientWidth / 2,
-          y: -innerHeight / 2,
-          opacity: 0,
-          duration: 1,
-        },
-        "-=1"
-      )
-      .to(rotation, {
-        z: Math.PI / 2,
-        y: Math.PI / 2,
-        duration: 1,
-        ease: "power4.in",
-      })
-      .to(
-        position,
-        {
-          z: 10,
-          x: 100,
-          duration: 1,
-          ease: "power1.in",
-        },
-        "-=1"
-      )
-      .to(
-        document.getElementById("gui-container"),
-        {
-          opacity: 0,
-          duration: 1,
-          ease: "power4.out",
-        },
-        "-=1"
-      )
-      .to(downloadResume, {
-        opacity: 1,
-        if(isMobile) {zIndex:1},
-        duration: 1,
-      })
-      .to(interactiveResume, {
-        opacity: 1,
-        if(isMobile) {zIndex:1},
-        duration: 1,
-      })
-      .to(backButton, {
-        opacity: 1,
-        zIndex: 2,
-        duration: 0.5,
-      });
+    tl.to(context.header, anim.panOut(context.header))
+      .to(context.buttonGroup, anim.panOut(context.buttonGroup), "-=1")
+      .to(rotation, anim.resumeRotation)
+      .to(position, anim.resumeLocation, "-=1")
+      .to(context.mainMenu, anim.hideHTML, "-=1")
+      .to(context.mobileMenu, anim.revealHTML)
+      .to(download, downlaodReveal)
+      .to(interactive, interactiveReveal)
+      .to(context.backButton, anim.revealHTML);
+  },
+  loadHTML() {
+    downloadButton = document.createElement("a");
+    downloadButton.id = "downloadResume";
+    downloadButton.className = "link";
+    downloadButton.innerHTML =
+      '<button class = "david-text button-35">Download Resume</button>';
+    context.mobileMenu.appendChild(downloadButton);
+
+    interactiveButton = document.createElement("a");
+    interactiveButton.id = "interactiveResume";
+    interactiveButton.className = "link";
+    interactiveButton.innerHTML =
+      '<button class = "david-text button-35">Interactive Resume</button>';
+    context.mobileMenu.appendChild(interactiveButton);
+
+    downloadButton.addEventListener("click", this.onClickDownload);
+    interactiveButton.addEventListener("click", this.onClickInteractiveResume);
   },
   loadObjects() {
     const texture = new THREE.TextureLoader();
@@ -130,126 +99,62 @@ export default {
     context.scene.add(icons.downloadResume, icons.interactiveResume);
   },
   return() {
-    context.world.currentPage = "home";
     this.returnHome();
   },
   returnHome() {
     context.world.currentPage = "home";
-    let tl = gsap.timeline();
-    tl.to(backButton, {
-      opacity: 0,
-      duration: 0.5,
-    })
-      .to(icons.interactiveResume.material, {
-        opacity: 0,
-        duration: 1,
-      })
-      .to(icons.downloadResume.material, {
-        opacity: 0,
-        duration: 1,
-      })
-      .to(
-        document.getElementById("resume-container"),
-        {
-          opacity: 0,
-          duration: 1,
-          zIndex: -1,
-          ease: "power4.in",
-        },
-        "-=.5"
-      )
-      .to(
-        document.getElementById("gui-container"),
-        {
-          opacity: 1,
-          duration: 1,
-          zIndex: 1,
-          ease: "power4.out",
-        },
-        "-=1"
-      )
-      .to(
-        header,
-        {
-          x: -innerWidth / 2 + header.innerWidth / 2,
-          y: innerHeight / 2 - header.innerHeight / 2,
-          opacity: 1,
-          duration: 1,
-        },
-        "-=.5"
-      )
-      .to(
-        buttonGroup,
-        {
-          x: -innerWidth / 2 + buttonGroup.innerWidth / 2,
-          y: innerHeight / 2 - buttonGroup.innerHeight / 2,
-          opacity: 1,
-          duration: 1,
-        },
-        "-=1"
-      )
-      .to(context.camera.rotation, {
-        z: 0,
-        y: 0,
-        x: 0,
-        duration: 1,
-        ease: "power4.out ",
-      })
-      .to(
-        context.camera.position,
-        {
-          x: 0,
-          y: 0,
-          z: 100,
-          duration: 1,
-          ease: "power1.out",
-        },
-        "-=1"
-      );
+    tl.to(interactive, interactiveHide)
+      .to(download, downloadHide, "-=1")
+      .to(context.backButton, anim.hideHTML, "-=1")
+      .to(context.mainMenu, anim.revealHTML, "-=1")
+      .to(context.header, anim.panIn(context.header), "-=.5")
+      .to(context.buttonGroup, anim.panIn(context.buttonGroup), "-=1")
+      .to(rotation, anim.mainMenuRotation)
+      .to(position, anim.mainMenuLocation, "-=1");
+    context.mobileMenu.innerHTML = "";
   },
   animate() {
-   // this.handleInteractiveIconAnimation();
-    // this.handleDownloadIconAnimation();
+    this.handleInteractiveIconAnimation();
+    this.handleDownloadIconAnimation();
     // this.handleHelperText();
   },
+  intersects(object) {
+    return context.raycaster.intersectObject(object).length > 0;
+  },
   handleInteractiveIconAnimation() {
-    const intersectsInteractiveResume =
-      context.raycaster.intersectObject(icons.interactiveResume).length > 0;
-    if (intersectsInteractiveResume) {
+    if (this.intersects(icons.interactiveResume)) {
       icons.interactiveResume.scale.x = 1.2;
       icons.interactiveResume.scale.y = 1.2;
       context.world.resume.interactiveResumehover = true;
     } else {
       icons.interactiveResume.scale.x = 1;
       icons.interactiveResume.scale.y = 1;
-      icons.interactiveResume.rotation.y -= Math.cos((frame * 1) / 2) * 0.001;
+      icons.interactiveResume.rotation.y += 0.002;
       context.world.resume.interactiveResumehover = false;
     }
   },
   handleDownloadIconAnimation() {
-    const intersectsPhysicalResume =
-      context.raycaster.intersectObject(icons.downloadResume).length > 0;
-    if (intersectsPhysicalResume) {
+    if (this.intersects(icons.downloadResume)) {
       icons.downloadResume.scale.x = 1.2;
       icons.downloadResume.scale.y = 1.2;
       context.world.resume.physicalResumehover = true;
     } else {
       icons.downloadResume.scale.x = 1;
       icons.downloadResume.scale.y = 1;
-      icons.downloadResume.rotation.y += Math.cos((frame * 1) / 2) * 0.001;
+      icons.downloadResume.rotation.y += 0.002;
       context.world.resume.physicalResumehover = false;
     }
   },
   handleHelperText() {
-    if (context.world.resume.interactiveResumehover) {
-      document.getElementById("helper-text").innerText =
-        "Click to begin an interactive journey";
-    } else if (context.world.resume.physicalResumehover) {
-      document.getElementById("helper-text").innerText =
-        "Click to download my resume";
-    } else {
-      document.getElementById("helper-text").innerText = "";
-    }
+    // if (context.world.resume.interactiveResumehover) {
+    //   document.getElementById("helper-text").innerText =
+    //     "Click to begin an interactive journey";
+    // } else if (context.world.resume.physicalResumehover) {
+    //   document.getElementById("helper-text").innerText =
+    //     "Click to download my resume";
+    // } else {
+    //   document.getElementById("helper-text").innerText = "";
+    // }
   },
   onClick() {
     this.onClickDownload();
