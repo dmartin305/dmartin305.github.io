@@ -27,7 +27,7 @@ export default {
         linkedin = linkedinButton;
         emailHide = linkedinHide = anim.hideHTML;
         emailReveal = linkedinReveal = anim.revealHTML;
-      } else { 
+      } else {
         this.loadObjects();
         email = icons.email.material;
         linkedin = icons.linkedin.material;
@@ -37,6 +37,11 @@ export default {
       context.pagesVisited.push("contact");
       rotation = context.camera.rotation;
       position = context.camera.position;
+    } else {
+      if (context.isMobile) {
+        context.mobileMenu.appendChild(linkedinButton);
+        context.mobileMenu.appendChild(emailButton);
+      }
     }
 
     tl.to(context.header, anim.panOut(context.header))
@@ -55,15 +60,14 @@ export default {
     linkedinButton.className = "link";
     linkedinButton.innerHTML =
       '<button class = "david-text button-35">Visit my Linkedin</button>';
-    document
-      .getElementById("mobile-button-container")
-      .appendChild(linkedinButton);
+    context.mobileMenu.appendChild(linkedinButton);
+
     emailButton = document.createElement("a");
     emailButton.id = "email-button";
     emailButton.className = "link";
     emailButton.innerHTML =
       '<button class = "david-text button-35">Copy my Email</button>';
-    document.getElementById("mobile-button-container").appendChild(emailButton);
+    context.mobileMenu.appendChild(emailButton);
 
     linkedinButton.addEventListener("click", this.onClickLinkedin);
     emailButton.addEventListener("click", this.onClickEmail);
@@ -107,8 +111,14 @@ export default {
       .to(context.buttonGroup, anim.panIn(context.buttonGroup), "-=1")
       .to(rotation, anim.mainMenuRotation)
       .to(position, anim.mainMenuLocation, "-=1");
+    context.mobileMenu.innerHTML = "";
   },
   animate() {
+    this.handleLinkedinIconAnimation();
+    this.handleEmailIconAnimation();
+    // this.handleHelperText();
+  },
+  handleLinkedinIconAnimation() {
     if (this.intersects(icons.linkedin)) {
       icons.linkedin.scale.x = 1.2;
       icons.linkedin.scale.y = 1.2;
@@ -119,7 +129,8 @@ export default {
       icons.linkedin.rotation.y += 0.002;
       context.world.contact.linkedinhover = false;
     }
-
+  },
+  handleEmailIconAnimation() {
     if (this.intersects(icons.email)) {
       icons.email.scale.x = 1.2;
       icons.email.scale.y = 1.2;
@@ -130,6 +141,8 @@ export default {
       icons.email.rotation.y += 0.002;
       context.world.contact.emailhover = false;
     }
+  },
+  handleHelperText() {
     // if (context.world.contact.linkedinhover) {
     //   document.getElementById("helper-text").innerText =
     //     "Click to visit my Linkedin Page";
