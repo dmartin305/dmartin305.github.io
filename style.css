@@ -39,9 +39,9 @@ svg text {
 
 #back-button {
   position: absolute;
-  top: 1%;
-  left: 1%;
-  font-size: 7vw;
+  top: 7vw;
+  left: 7vw;
+  font-size: 10vw;
   color:#fff;
   opacity: 0;
   z-index: -1;
@@ -50,7 +50,7 @@ svg text {
 
 /* #region Top level menu */
 .gui-container { opacity: 1; position: absolute; flex-direction: column; display: flex }
-#mobile-button-container { opacity: 0; z-index: -1; align-content: space-around; display: flex; flex-direction: column; }
+#mobile-button-container { top:20vh; opacity: 0; z-index: -1; align-content: space-around; display: flex; flex-direction: column; }
 .button-container { align-content: space-around; display: flex; flex-direction: row; }
 /* #endregion */
 #helper-text {
