@@ -32,7 +32,7 @@ export default {
         email = icons.email.material;
         linkedin = icons.linkedin.material;
         emailHide = linkedinHide = anim.hideMesh;
-        emailReveal = linkedinReveal = anim.hideMesh;
+        emailReveal = linkedinReveal = anim.revealMesh;
       }
       context.pagesVisited.push("contact");
       rotation = context.camera.rotation;
@@ -69,8 +69,8 @@ export default {
       '<button class = "david-text button-35">Copy my Email</button>';
     context.mobileMenu.appendChild(emailButton);
 
-    linkedinButton.addEventListener("click", this.onClickLinkedin);
-    emailButton.addEventListener("click", this.onClickEmail);
+    linkedinButton.addEventListener("click", () => this.onClickLinkedin());
+    emailButton.addEventListener("click", () => this.onClickEmail());
   },
   loadObjects() {
     const texture = new THREE.TextureLoader();
@@ -122,24 +122,20 @@ export default {
     if (this.intersects(icons.linkedin)) {
       icons.linkedin.scale.x = 1.2;
       icons.linkedin.scale.y = 1.2;
-      context.world.contact.linkedinhover = true;
     } else {
       icons.linkedin.scale.x = 1;
       icons.linkedin.scale.y = 1;
       icons.linkedin.rotation.y += 0.002;
-      context.world.contact.linkedinhover = false;
     }
   },
   handleEmailIconAnimation() {
     if (this.intersects(icons.email)) {
       icons.email.scale.x = 1.2;
       icons.email.scale.y = 1.2;
-      context.world.contact.emailhover = true;
     } else {
       icons.email.scale.x = 1;
       icons.email.scale.y = 1;
       icons.email.rotation.y += 0.002;
-      context.world.contact.emailhover = false;
     }
   },
   handleHelperText() {
@@ -157,27 +153,21 @@ export default {
     return context.raycaster.intersectObject(object).length > 0;
   },
   onClick() {
-    this.onClickLinkedin();
-    this.onClickEmail();
+    if (this.intersects(icons.linkedin)) this.onClickLinkedin();
+    if (this.intersects(icons.email)) this.onClickEmail();
   },
   onClickLinkedin() {
-    const linkedinHover = context.world.contact.linkedinhover;
-    if (linkedinHover) {
-      window.open(context.linkedinURL);
-      context.world.contact.linkedinhover = false;
-    }
+    window.open(context.linkedinURL);
   },
   async onClickEmail() {
     // TODO add feedback for user to know email is copied
-    const emailHover = context.world.contact.emailhover;
-    if (emailHover || context.isMobile) {
-      try {
-        await navigator.clipboard.writeText("dmartin305@gatech.edu");
-        console.log("Content copied to clipboard");
-        context.world.contact.emailhover = false;
-      } catch (err) {
-        console.error("Failed to copy: ", err);
-      }
+    // This will fail on iPhones safari since the local host uses
+    // http instead of https which will automatically throw an error
+    try {
+      await navigator.clipboard.writeText("dmartin305@gatech.edu");
+      console.log("Content copied to clipboard");
+    } catch (err) {
+      console.error("Failed to copy: ", err);
     }
   },
 };
