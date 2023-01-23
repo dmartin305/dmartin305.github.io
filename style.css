@@ -32,7 +32,10 @@ svg text {
   font-family: FontAwesome;
   background-color:white;
 }
-.button-35:hover { box-shadow: #fff 0 0 0 3px, transparent 0 0 0 0; } 
+/* Makes it such that any device, particularly touch based, will not have a border outline */
+@media (hover: hover) {
+.button-35:hover{ box-shadow: #fff 0 0 0 3px, transparent 0 0 0 0; } 
+}
 
 #back-button {
   position: absolute;
