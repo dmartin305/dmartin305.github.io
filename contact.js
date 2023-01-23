@@ -3,7 +3,8 @@ import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module
 import gsap from "gsap";
 import anim from "./animation";
 
-var linkedinButton,
+var header,
+  linkedinButton,
   emailButton,
   linkedin,
   email,
@@ -39,6 +40,7 @@ export default {
       position = context.camera.position;
     } else {
       if (context.isMobile) {
+        context.mobileMenu.appendChild(header);
         context.mobileMenu.appendChild(linkedinButton);
         context.mobileMenu.appendChild(emailButton);
       }
@@ -55,18 +57,25 @@ export default {
       .to(context.backButton, anim.revealHTML);
   },
   loadHTML() {
+    header = document.createElement("h1");
+    header.style.alignSelf = "center";
+    header.className = "david-text";
+    header.innerText = "Contact";
+
     linkedinButton = document.createElement("a");
     linkedinButton.id = "linkedin-button";
     linkedinButton.className = "link";
     linkedinButton.innerHTML =
-      '<button class = "david-text button-35">Visit my Linkedin</button>';
-    context.mobileMenu.appendChild(linkedinButton);
+      '<button style = "display: flex; padding-horizontal: 10%;  padding-left:5%;" class = "david-text button-35"><i style= "padding-right: 5%" class="fa-solid fa-arrow-up-right-from-square"></i> Visit my Linkedin</button>';
 
     emailButton = document.createElement("a");
     emailButton.id = "email-button";
     emailButton.className = "link";
     emailButton.innerHTML =
-      '<button class = "david-text button-35">Copy my Email</button>';
+      '<button style = "display: flex; padding-horizontal: 10%;  padding-left:5%;" class = "david-text button-35"><i style= "padding-right: 5%" class="fa-solid fa-copy"></i> Copy my Email</button>';
+
+    context.mobileMenu.appendChild(header);
+    context.mobileMenu.appendChild(linkedinButton);
     context.mobileMenu.appendChild(emailButton);
 
     linkedinButton.addEventListener("click", () => this.onClickLinkedin());
@@ -105,6 +114,7 @@ export default {
     context.world.currentPage = "home";
     tl.to(email, emailHide)
       .to(linkedin, linkedinHide, "-=1")
+      .to(context.mobileMenu, anim.hideHTML)
       .to(context.backButton, anim.hideHTML, "-=1")
       .to(context.mainMenu, anim.revealHTML, "-=1")
       .to(context.header, anim.panIn(context.header), "-=.5")

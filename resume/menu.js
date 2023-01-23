@@ -4,7 +4,8 @@ import gsap from "gsap";
 import sectionMenu from "./sectionMenu";
 import anim from "../animation";
 
-var interactiveButton,
+var header,
+  interactiveButton,
   downloadButton,
   interactive,
   download,
@@ -40,6 +41,7 @@ export default {
       position = context.camera.position;
     } else {
       if (context.isMobile) {
+        context.mobileMenu.appendChild(header);
         context.mobileMenu.appendChild(downloadButton);
         context.mobileMenu.appendChild(interactiveButton);
       }
@@ -56,18 +58,24 @@ export default {
       .to(context.backButton, anim.revealHTML);
   },
   loadHTML() {
+    header = document.createElement("h1");
+    header.style.alignSelf = "center";
+    header.className = "david-text";
+    header.innerText = "Resume";
+
     downloadButton = document.createElement("a");
     downloadButton.id = "downloadResume";
     downloadButton.className = "link";
     downloadButton.innerHTML =
-      '<button class = "david-text button-35">Download Resume</button>';
-    context.mobileMenu.appendChild(downloadButton);
+      '<button style = "display: flex; padding-horizontal: 10%;  padding-left:5%;" class = "david-text button-35"><i style= "padding-right: 5%" class="fa-solid fa-download"></i> Download CV</button>';
 
     interactiveButton = document.createElement("a");
     interactiveButton.id = "interactiveResume";
     interactiveButton.className = "link";
     interactiveButton.innerHTML =
-      '<button class = "david-text button-35">Interactive Resume</button>';
+      '<button style = "display: flex; padding-horizontal: 10%;  padding-left:5%;" class = "david-text button-35"><i style= "padding-right: 5%" class="fa-solid fa-user-astronaut"></i> Interactive CV</button>';
+    context.mobileMenu.appendChild(header);
+    context.mobileMenu.appendChild(downloadButton);
     context.mobileMenu.appendChild(interactiveButton);
 
     downloadButton.addEventListener("click", () => this.onClickDownload());
@@ -163,17 +171,18 @@ export default {
       this.onClickInteractiveResume();
     }
   },
-  async onClickDownload() { 
-    if(context.isMobile) downloadButton.innerHTML =
-    '<button class = "david-text button-35">Downloaded</button>';
+  async onClickDownload() {
+    if (context.isMobile)
+      downloadButton.innerHTML =
+        '<button class = "david-text button-35">Downloaded</button>';
     var link = document.createElement("a");
     link.download = "document";
     link.href = "../bg.jpeg";
     link.click();
-   
   },
   onClickInteractiveResume() {
-    if(context.isMobile) interactiveButton.innerHTML =
-    '<button class = "david-text button-35">Interacted</button>';
+    if (context.isMobile)
+      interactiveButton.innerHTML =
+        '<button class = "david-text button-35">Interacted</button>';
   },
 };
