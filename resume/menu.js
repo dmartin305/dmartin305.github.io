@@ -50,9 +50,9 @@ export default {
       .to(rotation, anim.resumeRotation)
       .to(position, anim.resumeLocation, "-=1")
       .to(context.mainMenu, anim.hideHTML, "-=1")
-      .to(context.mobileMenu, anim.revealHTML)
       .to(download, downlaodReveal)
       .to(interactive, interactiveReveal)
+      .to(context.mobileMenu, anim.revealHTML)
       .to(context.backButton, anim.revealHTML);
   },
   loadHTML() {
@@ -70,8 +70,10 @@ export default {
       '<button class = "david-text button-35">Interactive Resume</button>';
     context.mobileMenu.appendChild(interactiveButton);
 
-    downloadButton.addEventListener("click", this.onClickDownload);
-    interactiveButton.addEventListener("click", this.onClickInteractiveResume);
+    downloadButton.addEventListener("click", () => this.onClickDownload());
+    interactiveButton.addEventListener("click", () =>
+      this.onClickInteractiveResume()
+    );
   },
   loadObjects() {
     const texture = new THREE.TextureLoader();
@@ -105,6 +107,7 @@ export default {
     context.world.currentPage = "home";
     tl.to(interactive, interactiveHide)
       .to(download, downloadHide, "-=1")
+      .to(context.mobileMenu, anim.hideHTML)
       .to(context.backButton, anim.hideHTML, "-=1")
       .to(context.mainMenu, anim.revealHTML, "-=1")
       .to(context.header, anim.panIn(context.header), "-=.5")
@@ -125,24 +128,20 @@ export default {
     if (this.intersects(icons.interactiveResume)) {
       icons.interactiveResume.scale.x = 1.2;
       icons.interactiveResume.scale.y = 1.2;
-      context.world.resume.interactiveResumehover = true;
     } else {
       icons.interactiveResume.scale.x = 1;
       icons.interactiveResume.scale.y = 1;
       icons.interactiveResume.rotation.y += 0.002;
-      context.world.resume.interactiveResumehover = false;
     }
   },
   handleDownloadIconAnimation() {
     if (this.intersects(icons.downloadResume)) {
       icons.downloadResume.scale.x = 1.2;
       icons.downloadResume.scale.y = 1.2;
-      context.world.resume.physicalResumehover = true;
     } else {
       icons.downloadResume.scale.x = 1;
       icons.downloadResume.scale.y = 1;
       icons.downloadResume.rotation.y += 0.002;
-      context.world.resume.physicalResumehover = false;
     }
   },
   handleHelperText() {
@@ -157,24 +156,24 @@ export default {
     // }
   },
   onClick() {
-    this.onClickDownload();
-    this.onClickInteractiveResume();
-  },
-  async onClickDownload() {
-    const downloadHover = context.world.resume.physicalResumehover;
-    if (downloadHover || context.isMobile) {
-      context.world.resume.physicalResumehover = false;
-      var link = document.createElement("a");
-      link.download = "document";
-      link.href = "../bg.jpeg";
-      link.click();
+    if (this.intersects(icons.downloadResume)) {
+      this.onClickDownload();
     }
+    if (this.intersects(icons.interactiveResume)) {
+      this.onClickInteractiveResume();
+    }
+  },
+  async onClickDownload() { 
+    if(context.isMobile) downloadButton.innerHTML =
+    '<button class = "david-text button-35">Downloaded</button>';
+    var link = document.createElement("a");
+    link.download = "document";
+    link.href = "../bg.jpeg";
+    link.click();
+   
   },
   onClickInteractiveResume() {
-    const interactiveHover = context.world.resume.interactiveResumehover;
-    if (interactiveHover || context.isMobile) {
-      context.world.resume.interactiveResumehover = false;
-      sectionMenu.start();
-    }
+    if(context.isMobile) interactiveButton.innerHTML =
+    '<button class = "david-text button-35">Interacted</button>';
   },
 };
