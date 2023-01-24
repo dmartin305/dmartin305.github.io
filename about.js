@@ -8,7 +8,7 @@ let tl = gsap.timeline();
 export default {
   start() {
     context.world.currentPage = "about";
-    let unVisited = !context.pagesVisited.includes("contact");
+    let unVisited = !context.pagesVisited.includes("about");
     if (unVisited) {
       if (context.isMobile) {
         this.loadHTML();
@@ -19,6 +19,7 @@ export default {
       rotation = context.camera.rotation;
       position = context.camera.position;
     }
+
     tl.to(context.header, anim.panOut(context.header))
       .to(context.buttonGroup, anim.panOut(context.buttonGroup), "-=1")
       .to(rotation, anim.aboutRotation)
