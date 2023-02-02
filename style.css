@@ -1,7 +1,15 @@
 body {top: 0; left:0; margin: 0; overflow:hidden;  background-color: #111;}
 
-#container { position: absolute; width: 100vw; height:100vh; display: flex; align-items: center;  justify-content: center; }
+#container { position: absolute; width: 100vw; height: 100%;
+  height: -webkit-fill-available; display: flex; align-items: center;  justify-content: center; }
 
+#about-david {
+  position: absolute;
+  width: 80vw;
+  height: 80vh;
+  opacity: .9; 
+  z-index: -1; 
+}
 
 /* #region Splash Screen */
 .intro { position: fixed; z-index: 1; left:0; right:0;
