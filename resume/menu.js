@@ -48,10 +48,10 @@ export default {
     }
 
     tl.to(context.header, anim.panOut(context.header))
-      .to(context.buttonGroup, anim.panOut(context.buttonGroup), "-=1")
+      .to(context.buttonGroup, anim.panOut(context.buttonGroup), "<")
       .to(rotation, anim.resumeRotation)
-      .to(position, anim.resumeLocation, "-=1")
-      .to(context.mainMenu, anim.hideHTML, "-=1")
+      .to(position, anim.resumeLocation, "<")
+      .to(context.mainMenu, anim.hideHTML)
       .to(download, downlaodReveal)
       .to(interactive, interactiveReveal)
       .to(context.mobileMenu, anim.revealHTML)
@@ -114,14 +114,14 @@ export default {
   returnHome() {
     context.world.currentPage = "home";
     tl.to(interactive, interactiveHide)
-      .to(download, downloadHide, "-=1")
+      .to(download, downloadHide, "<")
       .to(context.mobileMenu, anim.hideHTML)
-      .to(context.backButton, anim.hideHTML, "-=1")
-      .to(context.mainMenu, anim.revealHTML, "-=1")
-      .to(context.header, anim.panIn(context.header), "-=.5")
-      .to(context.buttonGroup, anim.panIn(context.buttonGroup), "-=1")
+      .to(context.backButton, anim.hideHTML, "<")
+      .to(context.mainMenu, anim.revealHTML, "<")
+      .to(context.header, anim.panIn(context.header), "<")
+      .to(context.buttonGroup, anim.panIn(context.buttonGroup), "<")
       .to(rotation, anim.mainMenuRotation)
-      .to(position, anim.mainMenuLocation, "-=1");
+      .to(position, anim.mainMenuLocation, "<");
     context.mobileMenu.innerHTML = "";
   },
   animate() {

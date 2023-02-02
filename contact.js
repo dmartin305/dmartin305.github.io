@@ -47,10 +47,10 @@ export default {
     }
 
     tl.to(context.header, anim.panOut(context.header))
-      .to(context.buttonGroup, anim.panOut(context.buttonGroup), "-=1")
+      .to(context.buttonGroup, anim.panOut(context.buttonGroup), "<")
       .to(rotation, anim.contactRotation)
-      .to(position, anim.contactLocation, "-=1")
-      .to(context.mainMenu, anim.hideHTML, "-=1")
+      .to(position, anim.contactLocation, "<")
+      .to(context.mainMenu, anim.hideHTML)
       .to(context.mobileMenu, anim.revealHTML)
       .to(linkedin, linkedinReveal)
       .to(email, emailReveal)
