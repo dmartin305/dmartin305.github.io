@@ -1,9 +1,8 @@
+# main links links
 main:
-  - title: "Posts"
-    url: /posts/
-  - title: "Categories"
-    url: /categories/
-  - title: "Tags"
-    url: /tags/
-  - title: "About"
-    url: /about/
+  - title: "Publications"
+    url: /publications/
+  - title: "Press"
+    url: /publications/
+  - title: "Resume/CV"
+    url: /publications/
