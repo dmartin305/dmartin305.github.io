@@ -14,7 +14,7 @@
 
 <div class="{{ include.type | default: "list" }}__item" title="{{ post.title }}" id="{{ post.title | slugify }}" year="{{ post.date | date: "%Y" }}">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    {% if include.type == "grid" and teaser %}
+    <!-- {% if include.type == "grid" and teaser %}
       <div class="archive__item-teaser">
         <img src=
           {% if teaser contains "://" %}
@@ -24,7 +24,7 @@
           {% endif %}
           alt="">
       </div>
-    {% endif %}
+    {% endif %} -->
 
     <h2 class="archive__item-title" itemprop="headline">
       {% if post.collection == 'publications' %}
@@ -36,9 +36,9 @@
       {% endif %}
     </h2>
     
-    {% if post.collection == 'projects' or post.collection == 'publications' %}
+    <!-- {% if post.collection == 'projects' or post.collection == 'publications' %}
       <img src="{{ post.teaser }}" alt="{{ post.title }}" align="left" style="padding: 10px; width: 30%;">
-    {% endif %}
+    {% endif %} -->
     
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
