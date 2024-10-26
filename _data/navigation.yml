@@ -3,6 +3,8 @@ main:
   - title: "Publications"
     url: /publications/
   - title: "Press"
-    url: /publications/
+    url: /press/
+  - title: "Talks and Demos"
+    url:
   - title: "Resume/CV"
-    url: /publications/
+    url:
