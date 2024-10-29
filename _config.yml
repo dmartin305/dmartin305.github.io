@@ -8,6 +8,8 @@
 # Site Settings
 locale: "en-US"
 title: "David Martin"
+theme: jekyll-theme-minimal
+minimal_mistakes_skin: "aqua"
 title_separator: "-"
 name: &name "David Martin"
 description: &description "Personal website containing my portfolio & blog"

@@ -4,7 +4,7 @@ main:
     url: /publications/
   - title: "Press"
     url: /press/
-  - title: "Talks and Demos"
-    url:
-  - title: "Resume/CV"
-    url:
+  # - title: "Talks and Demos"
+  #   url:
+  - title: "Resume"
+    url: /cv/

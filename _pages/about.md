@@ -9,11 +9,11 @@ redirect_from:
   - /about.html
 ---
 
-Hi! I'm David Martin, an undergraduate at the Georgia Institute of Technology in Atlanta, GA. I am interested in creating technologies that provide access for Deaf and Hard-of-Hearing (DHH) individuals, sign language centric systems, and identifying avenues of accessibility in emerging technologies. 
+Hi! I'm David Martin, an undergraduate at the Georgia Institute of Technology in Atlanta, GA. I am passionate in creating and evaluating technologies that provide access across the spectrum of the Deaf and Hard-of-Hearing (DHH) community. My primary research focuses are: Sign language centric systems, captioning systems, and identifying avenues of accessibility in emerging technologies. 
 
-Currently, I am an Undergraduate Researcher in the Contextual Computing Group (CCG) under wearable computing pioneer, [Thad Starner](https://sites.cc.gatech.edu/home/thad/). Within the CCG, I have worked on captioning glasses, text-entry systems using smart rings to recognize American Sign Language (ASL) fingerspelling, constructing sign language datasets, and creating sign language games using ASL recognition for hearing parents of DHH children. 
+Currently, I am an undergraduate researcher in the Contextual Computing Group (CCG) under wearable computing pioneer, [Thad Starner](https://sites.cc.gatech.edu/home/thad/). Within the CCG, I have worked on captioning glasses, text-entry systems using smart rings to recognize American Sign Language (ASL) fingerspelling, constructing sign language datasets, and creating sign language games using ASL recognition for hearing parents of DHH children. 
 
-Previously, I was an Undergraduate in the [Bhamla Lab](https://bhamla.gatech.edu/) under [Saad Bhamla](https://www.chbe.gatech.edu/directory/person/saad-bhamla) where I worked on creating low cost hearing-aids and mobile hearing diagnostic tests. I also Interned at Microsoft Research under [Danielle Bragg](https://danibragg.com/) where I explored ASL dictionary systems to accommodate queries with partial linguistic information.
+Previously, I was an undergraduate researcher in the [Bhamla Lab](https://bhamla.gatech.edu/) under [Saad Bhamla](https://www.chbe.gatech.edu/directory/person/saad-bhamla) where I worked on creating low cost hearing-aids and mobile hearing diagnostic tests. I also Interned at Microsoft Research under [Danielle Bragg](https://danibragg.com/) where I explored ASL dictionary systems to accommodate queries with partial linguistic information.
 
 A fun fact for math geek readers, my [Erdős number](https://en.wikipedia.org/wiki/Erd%C5%91s_number) is 4:
 

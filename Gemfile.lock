@@ -277,6 +277,7 @@ DEPENDENCIES
   hawkins
   jekyll-feed
   jekyll-sitemap
+  jekyll-theme-minimal
 
 BUNDLED WITH
    2.3.27
